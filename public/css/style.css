@@ -20,6 +20,42 @@ body {
   color: var(--text);
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card);
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+nav .brand { font-weight: 700; font-size: 18px; }
+
+nav .links a {
+  margin-left: 18px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+}
+
+nav .links a.active { color: var(--primary); }
+
+#logoutBtn {
+  margin-left: 18px;
+  background: none;
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--muted);
+}
+
+main {
+  max-width: 960px;
+  margin: 32px auto;
+  padding: 0 20px;
+}
+
 .card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -80,95 +116,160 @@ button.secondary {
   gap: 14px;
 }
 
-.tab-buttons {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-.tab-btn {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--muted);
-}
-.tab-btn.active {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-}
-
-.public-wrap {
-  max-width: 480px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-.public-header {
-  text-align: center;
-  margin-bottom: 24px;
-}
-.public-header h1 { font-size: 22px; margin-bottom: 4px; }
-.public-header p { color: var(--muted); font-size: 14px; margin: 0; }
-
-.photo-picker { margin-top: 4px; }
-.photo-preview {
+table {
   width: 100%;
-  min-height: 96px;
-  border: 1.5px dashed var(--border);
-  border-radius: 10px;
-  background: #f8faff;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+th { color: var(--muted); font-size: 12px; text-transform: uppercase; }
+
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.pill.active { background: #dcfce7; color: var(--success); }
+.pill.inactive { background: #f1f2f6; color: var(--muted); }
+
+.stat-row { display: flex; gap: 16px; margin-bottom: 20px; }
+.stat-box {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+}
+.stat-box .num { font-size: 26px; font-weight: 700; }
+.stat-box .label { font-size: 12px; color: var(--muted); }
+
+#qrResult { text-align: center; margin-top: 20px; }
+#qrResult img { width: 220px; height: 220px; border: 1px solid var(--border); border-radius: 8px; }
+
+.login-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
-  overflow: hidden;
+  min-height: 100vh;
 }
-.photo-preview span { color: var(--muted); font-size: 13px; }
-.photo-preview img {
-  width: 96px;
-  height: 96px;
+.login-card { width: 340px; }
+
+#reader { width: 100%; max-width: 420px; margin: 0 auto; }
+
+#scanLog { max-height: 260px; overflow-y: auto; margin-top: 16px; }
+#scanLog .entry {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+#scanLog .entry.dup { color: #b45309; }
+#scanLog .entry.ok { color: var(--success); }
+#scanLog .entry.rejected { color: var(--danger); }
+
+.review-panel {
+  margin-top: 20px;
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 18px;
+  background: #f8faff;
+}
+.review-panel h2 { margin-top: 0; margin-bottom: 14px; }
+
+.review-body {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.review-body img {
+  width: 120px;
+  height: 120px;
   object-fit: cover;
   border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #eef1f7;
+  flex-shrink: 0;
 }
-.photo-picker-btns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.photo-btn {
-  padding: 12px 8px;
-  font-size: 13.5px;
+.review-details { flex: 1; }
+.review-name { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.review-details .row { font-size: 14px; color: var(--muted); margin-bottom: 2px; }
+.review-details .row strong { color: var(--text); }
+
+.review-flag {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 13px;
   font-weight: 600;
-  text-align: center;
 }
 
-@media (max-width: 480px) {
-  .public-wrap {
-    margin: 12px auto;
-    padding: 0 12px;
-  }
-  .public-header { margin-bottom: 16px; }
-  .public-header h1 { font-size: 19px; }
-  .public-header p { font-size: 13px; }
-  .card { padding: 16px; margin-bottom: 14px; }
-  .grid-2 {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  label { margin: 10px 0 5px; }
-  input, select { padding: 11px 12px; }
-  button.primary { padding: 13px 18px; font-size: 15px; }
-  .tab-btn { font-size: 13px; padding: 11px 6px; }
-  .photo-picker-btns { grid-template-columns: 1fr; gap: 8px; }
-  .photo-btn { padding: 13px 8px; }
-  #qrResult img, #retrieveResult img { width: 170px !important; height: 170px !important; }
+.review-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 16px;
 }
+.review-actions button#rejectBtn { border-color: var(--danger); color: var(--danger); }
 
-@media (max-width: 360px) {
-  .public-header h1 { font-size: 17px; }
-  .card { padding: 14px; }
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 20, 32, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+.modal {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal h2 { margin-top: 0; }
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+.edit-photo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.edit-photo-row img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #eef1f7;
+  flex-shrink: 0;
+}
+.edit-photo-row input[type="file"] { flex: 1; }
+
+.action-btns { display: flex; gap: 6px; }
+button.danger {
+  background: none;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
 }
