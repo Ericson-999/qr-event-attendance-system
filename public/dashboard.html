@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Dashboard · QR Attendance</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav>
+    <div class="brand">QR Attendance</div>
+    <div class="links">
+      <a href="/register.html">Register</a>
+      <a href="/events.html">Events</a>
+      <a href="/scan.html">Scan</a>
+      <a href="/dashboard.html" class="active">Dashboard</a>
+      <button id="logoutBtn">Log out</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="card">
+      <h1>Attendance Dashboard</h1>
+      <label>Select Event</label>
+      <select id="eventSelect"></select>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box"><div class="num" id="statTotal">0</div><div class="label">Registered Students</div></div>
+      <div class="stat-box"><div class="num" id="statPresent">0</div><div class="label">Present</div></div>
+      <div class="stat-box"><div class="num" id="statAbsent">0</div><div class="label">Absent</div></div>
+    </div>
+
+    <div class="card">
+      <h2>Attendance Log</h2>
+      <table id="attTable">
+        <thead><tr><th>Name</th><th>School ID</th><th>Section</th><th>Course</th><th>Year</th><th>Time Scanned</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

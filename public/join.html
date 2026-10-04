@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Student Registration · QR Attendance</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="public-wrap">
+    <div class="public-header">
+      <h1>Student QR Registration</h1>
+      <p>Register once to get your attendance QR code, or retrieve it if you already have one.</p>
+    </div>
+
+    <div class="tab-buttons">
+      <button class="tab-btn active" id="tabRegisterBtn" onclick="switchTab('register')">Register</button>
+      <button class="tab-btn" id="tabRetrieveBtn" onclick="switchTab('retrieve')">Retrieve My QR</button>
+    </div>
+
+    <!-- Registration form -->
+    <div class="card" id="registerPanel">
+      <form id="joinForm">
+        <label>Full Name</label>
+        <input type="text" id="fullName" required />
+
+        <label>School ID</label>
+        <input type="text" id="schoolId" required />
+
+        <div class="grid-2">
+          <div>
+            <label>Section</label>
+            <select id="section" required>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+          </div>
+          <div>
+            <label>Year Level</label>
+            <select id="year" required>
+              <option value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+              <option value="4">4th Year</option>
+            </select>
+          </div>
+        </div>
+
+        <label>Course</label>
+        <input type="text" id="course" placeholder="e.g. BSIT, BSCS" required />
+
+        <label>Your Photo (required)</label>
+        <div class="photo-picker">
+          <div class="photo-preview" id="photoPreview">
+            <span id="photoPreviewPlaceholder">No photo selected</span>
+            <img id="photoPreviewImg" style="display:none" alt="Selected photo preview" />
+          </div>
+          <div class="photo-picker-btns">
+            <button type="button" class="secondary photo-btn" id="takePhotoBtn">📷 Take Photo</button>
+            <button type="button" class="secondary photo-btn" id="choosePhotoBtn">🖼️ Choose from Gallery</button>
+          </div>
+          <!-- Explicit camera capture -->
+          <input type="file" id="photoCamera" accept="image/*" capture="user" style="display:none" />
+          <!-- Explicit gallery/file picker — no capture attribute, so it never opens the camera -->
+          <input type="file" id="photoGallery" accept="image/*" style="display:none" />
+        </div>
+
+        <button class="primary" type="submit" style="width:100%">Register &amp; Get My QR</button>
+      </form>
+      <div class="error" id="registerErrorMsg"></div>
+
+      <div id="qrResult" style="display:none">
+        <h2>You're registered!</h2>
+        <div style="text-align:center">
+          <img id="qrImage" src="" alt="Your QR code" style="width:220px;height:220px;border:1px solid var(--border);border-radius:8px" />
+          <p id="qrStudentName" style="margin-top:8px;font-weight:600"></p>
+          <p style="color:var(--muted);font-size:13px">Save or screenshot this QR code — you'll need it for attendance scanning.</p>
+          <a id="downloadLink" download="my_qr.png"><button class="secondary" type="button">Download QR</button></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Retrieve form -->
+    <div class="card" id="retrievePanel" style="display:none">
+      <p style="color:var(--muted);font-size:14px;margin-top:0">Lost your QR? Enter the same details you registered with.</p>
+      <form id="retrieveForm">
+        <label>Full Name</label>
+        <input type="text" id="retrieveFullName" required />
+        <label>School ID</label>
+        <input type="text" id="retrieveSchoolId" required />
+        <button class="primary" type="submit" style="width:100%">Find My QR</button>
+      </form>
+      <div class="error" id="retrieveErrorMsg"></div>
+
+      <div id="retrieveResult" style="display:none">
+        <div style="text-align:center;margin-top:16px">
+          <img id="retrieveQrImage" src="" alt="Your QR code" style="width:220px;height:220px;border:1px solid var(--border);border-radius:8px" />
+          <p id="retrieveStudentName" style="margin-top:8px;font-weight:600"></p>
+          <a id="retrieveDownloadLink" download="my_qr.png"><button class="secondary" type="button">Download QR</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/join.js"></script>
+</body>
+</html>

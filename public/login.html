@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Admin Login · QR Attendance</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="card login-card">
+      <h1>Admin Login</h1>
+      <label>Username</label>
+      <input type="text" id="username" autocomplete="username" />
+      <label>Password</label>
+      <input type="password" id="password" autocomplete="current-password" />
+      <button class="primary" id="loginBtn" style="width:100%">Log In</button>
+      <div class="error" id="errorMsg"></div>
+    </div>
+  </div>
+
+  <script src="/js/auth-guard.js"></script>
+  <script>
+    document.getElementById('loginBtn').addEventListener('click', login);
+    document.getElementById('password').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+    async function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const errorMsg = document.getElementById('errorMsg');
+      errorMsg.textContent = '';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          errorMsg.textContent = data.error || 'Login failed';
+          return;
+        }
+        window.location.href = '/register.html';
+      } catch (err) {
+        errorMsg.textContent = 'Could not reach server';
+      }
+    }
+  </script>
+</body>
+</html>

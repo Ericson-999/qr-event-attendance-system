@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Events · QR Attendance</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav>
+    <div class="brand">QR Attendance</div>
+    <div class="links">
+      <a href="/register.html">Register</a>
+      <a href="/events.html" class="active">Events</a>
+      <a href="/scan.html">Scan</a>
+      <a href="/dashboard.html">Dashboard</a>
+      <button id="logoutBtn">Log out</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="card">
+      <h1>Create Event / Session</h1>
+      <p style="color:var(--muted);font-size:14px">Only one event can be active at a time. Scanning always records attendance against the active event.</p>
+      <form id="eventForm">
+        <label>Event Name</label>
+        <input type="text" id="eventName" placeholder="e.g. Freshmen Orientation - Day 1" required />
+        <label>Date</label>
+        <input type="date" id="eventDate" />
+        <button class="primary" type="submit">Create Event</button>
+      </form>
+      <div class="error" id="errorMsg"></div>
+    </div>
+
+    <div class="card">
+      <h2>All Events</h2>
+      <table id="eventsTable">
+        <thead><tr><th>Name</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/events.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Scan Attendance · QR Attendance</title>
+<link rel="stylesheet" href="/css/style.css" />
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+</head>
+<body>
+  <nav>
+    <div class="brand">QR Attendance</div>
+    <div class="links">
+      <a href="/register.html">Register</a>
+      <a href="/events.html">Events</a>
+      <a href="/scan.html" class="active">Scan</a>
+      <a href="/dashboard.html">Dashboard</a>
+      <button id="logoutBtn">Log out</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="card">
+      <h1>Scan Attendance</h1>
+      <p id="activeEventLabel" style="color:var(--muted);font-size:14px"></p>
+      <div id="reader"></div>
+
+      <div id="reviewPanel" class="review-panel" style="display:none">
+        <h2>Verify Student</h2>
+        <div class="review-body">
+          <img id="reviewPhoto" src="" alt="Student photo" />
+          <div class="review-details">
+            <div class="review-name" id="reviewName"></div>
+            <div id="reviewMeta"></div>
+            <div id="reviewFlag" class="review-flag" style="display:none"></div>
+          </div>
+        </div>
+        <div class="review-actions">
+          <button class="secondary" id="rejectBtn">Reject</button>
+          <button class="primary" id="approveBtn">Approve &amp; Mark Present</button>
+        </div>
+      </div>
+
+      <div id="scanLog"></div>
+    </div>
+  </main>
+
+  <script src="/js/auth-guard.js"></script>
+  <script src="/js/scan.js"></script>
+</body>
+</html>
