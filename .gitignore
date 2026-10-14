@@ -1,5 +1,22 @@
 node_modules/
+
+# Secrets - never commit
 .env
-.env.example
+.env.*
+!.env.example
+
+# Student photos (personal data) - keep the folder, not the files
 uploads/students/*
 !uploads/students/.gitkeep
+
+# Logs
+*.log
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Build output (Electron, later)
+dist/
+out/
