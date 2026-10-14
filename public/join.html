@@ -6,10 +6,12 @@
 <title>Student Registration · QR Attendance</title>
 <link rel="stylesheet" href="/css/style.css" />
 <link rel="stylesheet" href="/css/join.css" />
+<script src="/js/theme.js"></script>
 </head>
 <body>
   <div class="public-wrap">
     <div class="public-header">
+      <button class="theme-toggle">🌙 Dark</button>
       <h1>Student QR Registration</h1>
       <p>Register once to get your attendance QR code, or retrieve it if you already have one.</p>
     </div>
@@ -62,9 +64,7 @@
             <button type="button" class="secondary photo-btn" id="takePhotoBtn">📷 Take Photo</button>
             <button type="button" class="secondary photo-btn" id="choosePhotoBtn">🖼️ Choose from Gallery</button>
           </div>
-          <!-- Explicit camera capture -->
           <input type="file" id="photoCamera" accept="image/*" capture="user" style="display:none" />
-          <!-- Explicit gallery/file picker — no capture attribute, so it never opens the camera -->
           <input type="file" id="photoGallery" accept="image/*" style="display:none" />
         </div>
 
@@ -75,7 +75,7 @@
       <div id="qrResult" style="display:none">
         <h2>You're registered!</h2>
         <div style="text-align:center">
-          <img id="qrImage" src="" alt="Your QR code" style="width:220px;height:220px;border:1px solid var(--border);border-radius:8px" />
+          <img id="qrImage" src="" alt="Your QR code" style="width:220px;height:220px;border-radius:16px" />
           <p id="qrStudentName" style="margin-top:8px;font-weight:600"></p>
           <p style="color:var(--muted);font-size:13px">Save or screenshot this QR code — you'll need it for attendance scanning.</p>
           <a id="downloadLink" download="my_qr.png"><button class="secondary" type="button">Download QR</button></a>
@@ -97,7 +97,7 @@
 
       <div id="retrieveResult" style="display:none">
         <div style="text-align:center;margin-top:16px">
-          <img id="retrieveQrImage" src="" alt="Your QR code" style="width:220px;height:220px;border:1px solid var(--border);border-radius:8px" />
+          <img id="retrieveQrImage" src="" alt="Your QR code" style="width:220px;height:220px;border-radius:16px" />
           <p id="retrieveStudentName" style="margin-top:8px;font-weight:600"></p>
           <a id="retrieveDownloadLink" download="my_qr.png"><button class="secondary" type="button">Download QR</button></a>
         </div>

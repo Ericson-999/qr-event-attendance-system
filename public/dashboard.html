@@ -4,15 +4,18 @@
 <meta charset="UTF-8" />
 <title>Dashboard · QR Attendance</title>
 <link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/dashboard-extra.css" />
+<script src="/js/theme.js"></script>
 </head>
 <body>
   <nav>
     <div class="brand">QR Attendance</div>
     <div class="links">
+      <a href="/dashboard.html" class="active">Dashboard</a>
       <a href="/register.html">Register</a>
       <a href="/events.html">Events</a>
       <a href="/scan.html">Scan</a>
-      <a href="/dashboard.html" class="active">Dashboard</a>
+      <button class="theme-toggle">🌙 Dark</button>
       <button id="logoutBtn">Log out</button>
     </div>
   </nav>
@@ -25,21 +28,60 @@
     </div>
 
     <div class="stat-row">
-      <div class="stat-box"><div class="num" id="statTotal">0</div><div class="label">Registered Students</div></div>
-      <div class="stat-box"><div class="num" id="statPresent">0</div><div class="label">Present</div></div>
-      <div class="stat-box"><div class="num" id="statAbsent">0</div><div class="label">Absent</div></div>
+      <div class="stat-box stat-total" id="statTotalBox">
+        <div class="num" id="statTotal">0</div>
+        <div class="label">Registered Students</div>
+        <div class="hint">Click to view all →</div>
+      </div>
+      <div class="stat-box stat-present" id="statPresentBox">
+        <div class="num" id="statPresent">0</div>
+        <div class="label">Present</div>
+        <div class="hint">Click to filter →</div>
+      </div>
+      <div class="stat-box stat-late" id="statLateBox">
+        <div class="num" id="statLate">0</div>
+        <div class="label">Late</div>
+        <div class="hint">Click to filter →</div>
+      </div>
+      <div class="stat-box stat-unfinished" id="statUnfinishedBox">
+        <div class="num" id="statUnfinished">0</div>
+        <div class="label">Unfinished</div>
+        <div class="hint">No time-out →</div>
+      </div>
+      <div class="stat-box stat-absent" id="statAbsentBox">
+        <div class="num" id="statAbsent">0</div>
+        <div class="label">Absent</div>
+        <div class="hint">Click to filter →</div>
+      </div>
     </div>
 
     <div class="card">
       <h2>Attendance Log</h2>
       <table id="attTable">
-        <thead><tr><th>Name</th><th>School ID</th><th>Section</th><th>Course</th><th>Year</th><th>Time Scanned</th></tr></thead>
+        <thead><tr><th>Name</th><th>School ID</th><th>Section</th><th>Course</th><th>Year</th><th>Time In</th><th>Time Out</th><th>Status</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
   </main>
 
+  <!-- Present / Late / Unfinished / Absent breakdown modal -->
+  <div id="breakdownModalBackdrop" class="modal-backdrop" style="display:none">
+    <div class="modal modal-wide">
+      <h2 id="breakdownTitle">Present Students</h2>
+      <div class="filter-row">
+        <select id="filterCourse"><option value="">All Courses</option></select>
+        <select id="filterSection"><option value="">All Sections</option></select>
+        <select id="filterYear"><option value="">All Years</option></select>
+      </div>
+      <div id="breakdownList"></div>
+      <div class="modal-actions">
+        <button type="button" class="secondary" id="closeBreakdownBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
   <script src="/js/auth-guard.js"></script>
   <script src="/js/dashboard.js"></script>
+  <script src="/js/export-doc.js"></script>
 </body>
 </html>

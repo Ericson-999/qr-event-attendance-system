@@ -5,18 +5,15 @@ document.getElementById('editModalBackdrop').addEventListener('click', e => {
   if (e.target.id === 'editModalBackdrop') closeEditModal();
 });
 
-document.getElementById('shareLinkInput').value = `${window.location.origin}/join.html`;
-loadStudents();
+loadStudents().then(scrollToTableIfRequested);
 
-function copyShareLink() {
-  const input = document.getElementById('shareLinkInput');
-  input.select();
-  navigator.clipboard.writeText(input.value).then(() => {
-    const btn = event.target;
-    const original = btn.textContent;
-    btn.textContent = 'Copied!';
-    setTimeout(() => (btn.textContent = original), 1500);
-  });
+// If arriving from the Dashboard's "Registered Students" stat, jump straight
+// to the student list instead of leaving the admin to scroll down manually.
+function scrollToTableIfRequested() {
+  if (window.location.hash === '#studentsTable') {
+    const el = document.getElementById('studentsTable');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 async function handleRegister(e) {
@@ -64,7 +61,7 @@ async function loadStudents() {
   const res = await fetch('/api/students');
   if (!res.ok) return;
   const students = await res.json();
-  const tbody = document.querySelector('#studentsTable tbody');
+  const tbody = document.querySelector('#studentsTableEl tbody');
   tbody.innerHTML = '';
   students.forEach(s => {
     const tr = document.createElement('tr');

@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Admin Login · QR Attendance</title>
 <link rel="stylesheet" href="/css/style.css" />
+<script src="/js/theme.js"></script>
 </head>
 <body>
   <div class="login-wrap">
+    <button class="theme-toggle">🌙 Dark</button>
     <div class="card login-card">
       <h1>Admin Login</h1>
       <label>Username</label>
@@ -40,7 +43,7 @@
           errorMsg.textContent = data.error || 'Login failed';
           return;
         }
-        window.location.href = '/register.html';
+        window.location.href = '/dashboard.html';
       } catch (err) {
         errorMsg.textContent = 'Could not reach server';
       }

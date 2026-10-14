@@ -7,7 +7,7 @@ async function checkAuth() {
       window.location.href = '/login.html';
     }
     if (data.authenticated && isLoginPage) {
-      window.location.href = '/register.html';
+      window.location.href = '/dashboard.html';
     }
   } catch (err) {
     if (!isLoginPage) window.location.href = '/login.html';

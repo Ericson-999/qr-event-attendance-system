@@ -1,0 +1,14 @@
+/* Extra status pills for the Events page. Neutral tints work in light and dark. */
+.pill.waiting  { background: rgba(234, 179, 8, .18);  color: #b7791f; }
+.pill.overtime { background: rgba(239, 68, 68, .18);  color: #dc2626; }
+.pill.ended    { background: rgba(120, 130, 150, .18); color: #7b8498; }
+:root[data-theme="dark"] .pill.waiting  { color: #facc15; }
+:root[data-theme="dark"] .pill.overtime { color: #f87171; }
+:root[data-theme="dark"] .pill.ended    { color: #9aa3b8; }
+
+.event-time small { display: block; color: var(--muted); font-size: 12px; }
+.row-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem 1rem; }
+.form-grid label { display: block; margin-bottom: .25rem; }
+.quick-times { display: flex; gap: .5rem; flex-wrap: wrap; margin: .75rem 0; }
+#actionMsg { margin: .5rem 0; }

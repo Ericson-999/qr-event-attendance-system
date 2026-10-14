@@ -2,17 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Events · QR Attendance</title>
 <link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/events-extra.css" />
+<script src="/js/theme.js"></script>
 </head>
 <body>
   <nav>
     <div class="brand">QR Attendance</div>
     <div class="links">
+      <a href="/dashboard.html">Dashboard</a>
       <a href="/register.html">Register</a>
       <a href="/events.html" class="active">Events</a>
       <a href="/scan.html">Scan</a>
-      <a href="/dashboard.html">Dashboard</a>
+      <button class="theme-toggle">🌙 Dark</button>
       <button id="logoutBtn">Log out</button>
     </div>
   </nav>
@@ -20,12 +24,35 @@
   <main>
     <div class="card">
       <h1>Create Event / Session</h1>
-      <p style="color:var(--muted);font-size:14px">Only one event can be active at a time. Scanning always records attendance against the active event.</p>
+      <p style="color:var(--muted);font-size:14px">New events start as <strong>Waiting</strong>. Press <strong>Start</strong> when the event begins; scanning only works while an event is running. Only one event can run at a time.</p>
       <form id="eventForm">
         <label>Event Name</label>
         <input type="text" id="eventName" placeholder="e.g. Freshmen Orientation - Day 1" required />
-        <label>Date</label>
-        <input type="date" id="eventDate" />
+
+        <div class="form-grid">
+          <div>
+            <label for="eventDate">Date</label>
+            <input type="date" id="eventDate" />
+          </div>
+          <div>
+            <label for="startTime">Start time</label>
+            <input type="time" id="startTime" required />
+          </div>
+          <div>
+            <label for="endTime">End time</label>
+            <input type="time" id="endTime" required />
+          </div>
+          <div>
+            <label for="lateAfter">Late after (minutes)</label>
+            <input type="number" id="lateAfter" min="0" max="600" value="30" />
+          </div>
+          <div>
+            <label for="minStay">Minimum stay (minutes)</label>
+            <input type="number" id="minStay" min="0" max="600" value="10" />
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:13px">Late after = minutes after the event starts before a time-in counts as late. Minimum stay = how long after time-in a student can time out.</p>
+
         <button class="primary" type="submit">Create Event</button>
       </form>
       <div class="error" id="errorMsg"></div>
@@ -33,12 +60,47 @@
 
     <div class="card">
       <h2>All Events</h2>
+      <div class="error" id="actionMsg"></div>
       <table id="eventsTable">
-        <thead><tr><th>Name</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+        <thead><tr><th>Name</th><th>Date</th><th>Time</th><th>Status</th><th>Action</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
   </main>
+
+  <!-- Stop confirmation -->
+  <div id="stopModalBackdrop" class="modal-backdrop" style="display:none">
+    <div class="modal">
+      <h2>Stop this event?</h2>
+      <p id="stopModalText"></p>
+      <p style="color:var(--muted);font-size:14px">Scanning will stop for everyone. This cannot be undone.</p>
+      <div class="modal-actions">
+        <button type="button" class="secondary" id="stopCancelBtn">Keep running</button>
+        <button type="button" class="primary" id="stopConfirmBtn">Yes, stop event</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add time -->
+  <div id="timeModalBackdrop" class="modal-backdrop" style="display:none">
+    <div class="modal">
+      <h2>Add time</h2>
+      <p id="timeModalText"></p>
+      <div class="quick-times">
+        <button type="button" class="secondary" data-min="10">+10 min</button>
+        <button type="button" class="secondary" data-min="15">+15 min</button>
+        <button type="button" class="secondary" data-min="30">+30 min</button>
+        <button type="button" class="secondary" data-min="60">+1 hour</button>
+      </div>
+      <label for="customMinutes">Minutes to add</label>
+      <input type="number" id="customMinutes" min="1" max="240" value="10" />
+      <div class="error" id="timeModalError"></div>
+      <div class="modal-actions">
+        <button type="button" class="secondary" id="timeCancelBtn">Cancel</button>
+        <button type="button" class="primary" id="timeConfirmBtn">Add time</button>
+      </div>
+    </div>
+  </div>
 
   <script src="/js/auth-guard.js"></script>
   <script src="/js/events.js"></script>

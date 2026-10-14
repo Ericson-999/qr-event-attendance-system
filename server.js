@@ -39,6 +39,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/scan', scanRoutes);
+app.use('/api/attendance', require('./routes/attendanceExport'));
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/public', publicRoutes); // no login required — used by the self-registration page
 

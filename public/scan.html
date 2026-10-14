@@ -4,16 +4,19 @@
 <meta charset="UTF-8" />
 <title>Scan Attendance · QR Attendance</title>
 <link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/dashboard-extra.css" />
+<script src="/js/theme.js"></script>
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 </head>
 <body>
   <nav>
     <div class="brand">QR Attendance</div>
     <div class="links">
+      <a href="/dashboard.html">Dashboard</a>
       <a href="/register.html">Register</a>
       <a href="/events.html">Events</a>
       <a href="/scan.html" class="active">Scan</a>
-      <a href="/dashboard.html">Dashboard</a>
+      <button class="theme-toggle">🌙 Dark</button>
       <button id="logoutBtn">Log out</button>
     </div>
   </nav>
@@ -22,10 +25,23 @@
     <div class="card">
       <h1>Scan Attendance</h1>
       <p id="activeEventLabel" style="color:var(--muted);font-size:14px"></p>
+
+      <div class="mode-toggle" id="modeToggle">
+        <button type="button" id="modeInBtn" class="primary">Time In</button>
+        <button type="button" id="modeOutBtn" class="secondary">Time Out</button>
+      </div>
+      <p id="modeLabel" class="mode-label"></p>
+
+      <div class="camera-row">
+        <select id="cameraSelect" aria-label="Camera"><option value="">Looking for cameras...</option></select>
+        <button type="button" class="secondary" id="refreshCamBtn">Refresh</button>
+        <label class="flip-label"><input type="checkbox" id="flipToggle" /> Flip preview</label>
+      </div>
+
       <div id="reader"></div>
 
       <div id="reviewPanel" class="review-panel" style="display:none">
-        <h2>Verify Student</h2>
+        <h2 id="reviewTitle">Verify Student</h2>
         <div class="review-body">
           <img id="reviewPhoto" src="" alt="Student photo" />
           <div class="review-details">
@@ -36,7 +52,7 @@
         </div>
         <div class="review-actions">
           <button class="secondary" id="rejectBtn">Reject</button>
-          <button class="primary" id="approveBtn">Approve &amp; Mark Present</button>
+          <button class="primary" id="approveBtn">Approve</button>
         </div>
       </div>
 

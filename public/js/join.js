@@ -1,7 +1,7 @@
 const DRAFT_KEY = 'joinFormDraft';
 const DRAFT_FIELDS = ['fullName', 'schoolId', 'section', 'course', 'year'];
 
-let selectedPhotoFile = null; // the file actually used at submit time, from whichever source
+let selectedPhotoFile = null;
 
 document.getElementById('joinForm').addEventListener('submit', handleJoin);
 document.getElementById('retrieveForm').addEventListener('submit', handleRetrieve);
@@ -25,11 +25,6 @@ function switchTab(tab) {
   document.getElementById('retrievePanel').style.display = isRegister ? 'none' : 'block';
 }
 
-// --- Photo selection + client-side compression ---
-// Phone camera photos are often 3-8MB; over a free tunnel connection that's
-// the single biggest source of upload delay. Resizing to a sensible max
-// dimension and re-encoding as JPEG before upload cuts this dramatically
-// (typically to a few hundred KB) with no visible quality loss for an ID photo.
 async function handlePhotoPicked(file) {
   if (!file) return;
   const errorMsg = document.getElementById('registerErrorMsg');
@@ -38,21 +33,19 @@ async function handlePhotoPicked(file) {
   try {
     const compressed = await compressImage(file, 900, 0.82);
     selectedPhotoFile = compressed;
-
-    const previewUrl = URL.createObjectURL(compressed);
-    const img = document.getElementById('photoPreviewImg');
-    img.src = previewUrl;
-    img.style.display = 'block';
-    document.getElementById('photoPreviewPlaceholder').style.display = 'none';
+    showPreview(compressed);
   } catch (err) {
-    // Fall back to the original file if compression fails for any reason
     selectedPhotoFile = file;
-    const previewUrl = URL.createObjectURL(file);
-    const img = document.getElementById('photoPreviewImg');
-    img.src = previewUrl;
-    img.style.display = 'block';
-    document.getElementById('photoPreviewPlaceholder').style.display = 'none';
+    showPreview(file);
   }
+}
+
+function showPreview(fileOrBlob) {
+  const previewUrl = URL.createObjectURL(fileOrBlob);
+  const img = document.getElementById('photoPreviewImg');
+  img.src = previewUrl;
+  img.style.display = 'block';
+  document.getElementById('photoPreviewPlaceholder').style.display = 'none';
 }
 
 function compressImage(file, maxDimension, quality) {
@@ -87,7 +80,6 @@ function compressImage(file, maxDimension, quality) {
   });
 }
 
-// --- Draft persistence (text fields only — photos aren't safely persistable) ---
 function saveDraft() {
   const draft = {};
   DRAFT_FIELDS.forEach(id => { draft[id] = document.getElementById(id).value; });
@@ -113,7 +105,6 @@ function clearDraft() {
   } catch (err) {}
 }
 
-// --- Form submission ---
 async function handleJoin(e) {
   e.preventDefault();
   const errorMsg = document.getElementById('registerErrorMsg');

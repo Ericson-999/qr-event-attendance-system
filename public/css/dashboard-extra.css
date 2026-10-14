@@ -1,0 +1,27 @@
+/* Extra styles for the time-in/time-out update (dashboard + scan page). */
+
+/* Dashboard: 5 stat boxes (Registered, Present, Late, Unfinished, Absent) */
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+.stat-late .num { color: #d97706; }
+.stat-unfinished .num { color: #7c3aed; }
+:root[data-theme="dark"] .stat-late .num { color: #fbbf24; }
+:root[data-theme="dark"] .stat-unfinished .num { color: #a78bfa; }
+
+/* Breakdown list: small tags next to a student */
+.tag-late { font-size: 12px; font-weight: 700; color: #d97706; margin-left: .4rem; }
+:root[data-theme="dark"] .tag-late { color: #fbbf24; }
+.attendance-row .times { color: var(--muted); font-size: 13px; white-space: nowrap; }
+
+/* Scan page: Time In / Time Out toggle */
+.mode-toggle { display: flex; gap: .6rem; margin: .5rem 0; }
+.mode-toggle button { flex: 1; }
+.mode-label { font-weight: 700; margin: .25rem 0 1rem; }
+.review-flag.flag-error { color: #dc2626; }
+:root[data-theme="dark"] .review-flag.flag-error { color: #f87171; }
+
+/* Scan page: camera picker */
+.camera-row { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin: .5rem 0 1rem; }
+.camera-row select { flex: 1 1 200px; min-width: 0; }
+.flip-label { display: inline-flex; align-items: center; gap: .4rem; font-size: 14px; white-space: nowrap; }
+/* Flip only changes what you see. The QR is still read from the real, unflipped image. */
+#reader.flipped video { transform: scaleX(-1); }

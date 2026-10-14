@@ -4,29 +4,22 @@
 <meta charset="UTF-8" />
 <title>Register Student · QR Attendance</title>
 <link rel="stylesheet" href="/css/style.css" />
+<script src="/js/theme.js"></script>
 </head>
 <body>
   <nav>
     <div class="brand">QR Attendance</div>
     <div class="links">
+      <a href="/dashboard.html">Dashboard</a>
       <a href="/register.html" class="active">Register</a>
       <a href="/events.html">Events</a>
       <a href="/scan.html">Scan</a>
-      <a href="/dashboard.html">Dashboard</a>
+      <button class="theme-toggle">🌙 Dark</button>
       <button id="logoutBtn">Log out</button>
     </div>
   </nav>
 
   <main>
-    <div class="card">
-      <h2>Student Self-Registration Link</h2>
-      <p style="color:var(--muted);font-size:14px;margin-bottom:0">Share this link with students so they can register themselves and get their own QR code — no admin typing required.</p>
-      <div class="share-link-row">
-        <input type="text" id="shareLinkInput" readonly />
-        <button class="secondary" onclick="copyShareLink()">Copy</button>
-      </div>
-    </div>
-
     <div class="card">
       <h1>Register Student (Admin)</h1>
       <form id="regForm">
@@ -78,9 +71,9 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" id="studentsTable">
       <h2>All Registered Students</h2>
-      <table id="studentsTable">
+      <table id="studentsTableEl">
         <thead>
           <tr><th>Name</th><th>School ID</th><th>Section</th><th>Course</th><th>Year</th><th>QR</th><th>Actions</th></tr>
         </thead>
