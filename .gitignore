@@ -1,16 +1,25 @@
+# Dependencies
 node_modules/
 
 # Secrets - never commit
 .env
 .env.*
 !.env.example
+*.pem
+*.key
 
 # Student photos (personal data) - keep the folder, not the files
+uploads/*
+!uploads/students/
 uploads/students/*
 !uploads/students/.gitkeep
 
 # Logs
 *.log
+npm-debug.log*
+
+# Zips and generated files
+*.zip
 
 # OS and editor files
 .DS_Store
