@@ -1,0 +1,73 @@
+/* Mobile layer for the admin pages. Loaded LAST, after style.css and the *-extra.css files.
+   Only applies on small screens, so the desktop layout is not touched. */
+
+html { -webkit-text-size-adjust: 100%; }
+body { padding-bottom: env(safe-area-inset-bottom); overflow-x: hidden; }
+input[type="date"], input[type="time"], input[type="number"], input[type="file"] { min-width: 0; max-width: 100%; }
+#reader video { max-width: 100%; height: auto; }
+
+@media (max-width: 768px) {
+  /* Navigation: brand on top, links wrap into rows */
+  nav { flex-direction: column; align-items: stretch; gap: 8px; padding: 10px 12px; }
+  nav .brand { font-size: 16px; text-align: center; }
+  nav .links { flex-wrap: wrap; justify-content: center; gap: 6px; }
+  nav .links a { margin-left: 0; padding: 8px 12px; font-size: 14px; border-radius: var(--radius-sm); }
+  nav .links a.active { background: var(--primary-soft); }
+  .theme-toggle, #logoutBtn { margin-left: 0; padding: 8px 12px; }
+
+  /* Page and cards */
+  main { margin: 14px auto; padding: 0 12px; }
+  .card { padding: 18px; margin-bottom: 14px; border-radius: 20px; }
+  h1 { font-size: 20px; }
+  .grid-2 { grid-template-columns: 1fr; gap: 0; }
+  .form-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Tap-friendly buttons */
+  button.primary, button.secondary, button.danger { min-height: 44px; }
+  .row-actions, .action-btns { flex-wrap: wrap; }
+  .quick-times button { flex: 1 1 40%; }
+
+  /* Dashboard stat boxes: "Registered" full width, the other four in 2 columns */
+  .stat-row { grid-template-columns: repeat(2, 1fr) !important; gap: .75rem; }
+  .stat-row .stat-total { grid-column: 1 / -1; }
+  .stat-box { min-width: 0; padding: 14px 8px; }
+  .stat-box .num { font-size: 24px; }
+  .stat-box .hint { display: none; }
+
+  /* Wide tables scroll sideways inside their card instead of stretching the page */
+  main .card table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+  th, td { padding: 10px 8px; }
+
+  /* Popups */
+  .modal-backdrop { padding: 12px; }
+  .modal { padding: 20px; max-height: 92vh; }
+  .modal-actions { flex-wrap: wrap; }
+  .modal-actions button { flex: 1 1 auto; }
+  .filter-row select { flex: 1 1 100%; }
+  .attendance-row { flex-wrap: wrap; gap: 4px; }
+  .attendance-row .times { white-space: normal; }
+  .edit-photo-row { flex-wrap: wrap; }
+
+  /* Scan page */
+  #reader { max-width: 100%; }
+  .camera-row select { flex: 1 1 100%; }
+  .mode-toggle button { min-height: 48px; font-size: 15px; }
+  .review-panel { padding: 16px; }
+  .review-body { gap: 12px; }
+  .review-body img { width: 96px; height: 96px; }
+  .review-name { font-size: 18px; }
+  .review-actions button { flex: 1; }
+  #scanLog { max-height: 200px; }
+
+  /* Register page */
+  #qrResult img { width: 190px; height: 190px; }
+
+  /* Login */
+  .login-card { width: 100%; max-width: 340px; margin: 0 16px; }
+}
+
+@media (max-width: 380px) {
+  nav .links a { padding: 6px 8px; font-size: 13px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .review-body { flex-direction: column; align-items: center; text-align: center; }
+}
